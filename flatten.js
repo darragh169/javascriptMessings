@@ -15,4 +15,17 @@ function flatten (input = []) {
   return arr
 }
 
+function flattenWithReduce (input = []) {
+  const arr = input.reduce((acc, item) => {
+    if (Array.isArray(item)) {
+      acc.push(...flattenWithReduce(item))
+    } else {
+      acc.push(item)
+    }
+    return acc
+  }, [])
+  return arr
+}
+
 console.log(flatten(exampleArray)) // [1,2,3,4,5,6,7,8,9,10]
+console.log(flattenWithReduce(exampleArray)) // [1,2,3,4,5,6,7,8,9,10]
